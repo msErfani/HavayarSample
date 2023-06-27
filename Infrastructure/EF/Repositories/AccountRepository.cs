@@ -25,7 +25,8 @@ namespace Infrastructure.EF.Repositories
 
         public Task Delete(AppUser model)
         {
-            throw new NotImplementedException();
+            model.IsDeleted = true;
+            return Task.CompletedTask;
         }
 
         public void Dispose()
@@ -40,12 +41,13 @@ namespace Infrastructure.EF.Repositories
 
         public async Task<IEnumerable<AppUser>> GetAll()
         {
-            return await _context.Users.ToListAsync();   
+            return await _context.Users.ToListAsync();
         }
 
-        public Task<bool> Save()
+        public async Task<bool> Save()
         {
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public Task Update(AppUser model)

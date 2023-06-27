@@ -1,4 +1,5 @@
 ﻿using Application.Accounts.Commands;
+using Application.Accounts.Commands.Deletes;
 using Application.Accounts.Queries;
 using Domain.Entities;
 using MediatR;
@@ -86,16 +87,17 @@ namespace Web.Controllers
         }
 
         [Authorize(Roles = Roles.Admin)]
-        public async Task<IActionResult> Delete()
-        {
+        public async Task<IActionResult> Delete(int id)
+        {         
             return View();
         }
 
         [HttpPost, ActionName("Delete")]
         [Authorize(Roles = Roles.Admin)]
 
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(DeleteAccount command)
         {
+            await _mediator.Send(command);
             return View();
         }
 
