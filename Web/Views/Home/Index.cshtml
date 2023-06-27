@@ -25,7 +25,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model ?? Enumerable.Empty<GetAllAcoountDTO>())
                     {
                         <tr class="text-center">
                             <td>
